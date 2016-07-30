@@ -1,25 +1,35 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "My Experience at CAV 2016"
 date:   2016-07-29 14:00:06 -0700
-categories: jekyll update
+categories: conference
+tags: cav
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+![CAV 2016 Banner]({{site.url}}{{site.baseurl}}/images/cav2016.png)
 
-Jekyll also offers powerful support for code snippets:
+Last week, I attended the [Verification Mentorship Workshop
+(VMW)](http://i-cav.org/2016/vmw/) held at [CAV 2016](http://i-cav.org/2016/).
+CAV is a conference where researchers meet to present and discuss advances in
+computer-aided verification.  It is one of the top conferences in the field of
+formal methods and in computer science.  This year it was held in Toronto,
+Ontario, Canada.  VMW is a full-day workshop where graduate students meet
+researchers and learn about the problems being adddressed by the CAV community.
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+The morning speakers in VMW talked about major research themes in Formal
+Methods.  The first speaker was Kenneth Mcmillan from Microsoft Research.  He
+talked about Model Checking.  Then followed Nikolaj Bjorner, also from
+Microsoft Research and one of the creators of the Z3 theorem prover.  He talked
+about the history of SAT solvers, SMT solvers, and First-order Theorem provers.  
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+In the afternoon, three researchers working Academia, Research Lab, and
+Industry talked about their career paths.  Ruzica Piskac, an assistant
+professor at Yale, spoke about why she left industry to join academia.  Arie
+Gurfinkel describe what it is like to conduct research at a research lab, SEI
+CMU.  Finally, Franjo Ivancic, told us about his experience at Google.  There
+was a panel session with additional researchers working at Amazon, Apple,
+Google, and Microsoft.
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
+
+Overall, my experience at VMW and CAV was enlightening.  I gained a better understanding of the challenges in Formal Methods, and was able to learn about approaches being used by researchers around the world.
