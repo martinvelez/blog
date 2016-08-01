@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "My Experience at VWM 2016"
+title:  "My Experience at VMW 2016"
+author: "Martin Velez"
 date:   2016-07-29 14:00:06 -0700
 categories: conference
-tags: cav
+tags: [research, conference, cav, vmw]
 ---
 
 ![CAV 2016 Banner]({{site.url}}{{site.baseurl}}/images/cav2016.png)
@@ -46,20 +47,21 @@ introduced me to The
 4. Who cares?  If you are successful, what difference will it make?
 5. How much will it cost?  How long will it take?
 
-On Tuesday, Pavol Bielik gave an interesting view of the machine learning
+On Tuesday, Pavol Bielik gave an interesting overview of machine learning
 programs. 
   
 The main CAV conference took place from Wednesday through Saturday.  I attended
 most technical research presentations.  I especially enjoyed the talk gave by my
-lab colleague, [Zhoulai Fu](http://zhoulaifu.com/), titled "[XSat: A Fast Floating-Point Satisfiability
+lab colleague, [Zhoulai Fu](http://zhoulaifu.com/), titled "[XSat: A Fast
+Floating-Point Satisfiability
 Solver](http://zhoulaifu.com/wp-content/papercite-data/pdf/xsat.pdf)".  In this
-paper, Fu and Su present a reduction from solving floating-point satisfiability
-to mathematical optimization.
+paper, Fu and Su present a reduction from floating-point satisfiability to
+mathematical optimization.
 
 Overall, my experience at VMW and CAV was enlightening.  I gained a better
 understanding of the challenges in Formal Methods.  I learned about approaches
 being used by researchers around the world in addressing these challenges.  And
-I made new friends!  I thank the organizers [Aarti
+I made new friends!  I thank the organizers, [Aarti
 Gupta](http://www.cs.princeton.edu/~aartig/), [Ruzica
 Piskac](http://www.cs.yale.edu/homes/piskac/), and [Andrey
 Rybalchenko](https://www.microsoft.com/en-us/research/people/rybal/) for making
