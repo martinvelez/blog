@@ -19,3 +19,6 @@ permalink: /:year/:month/:day/:title.html
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - jekyll-sitemap
