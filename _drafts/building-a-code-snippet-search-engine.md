@@ -81,9 +81,10 @@ Python | 587,679 | 947,241 | 932,529
 ### Indexing Snippets
 
 We tokenized each post to extract its set of words using the tokenize function
-in the Appendix.  Since the posts contains both English text and code, the words
-we extract belong to the union of English and the respective programming
-language of the post. 
+in the Appendix.  Since queries are usually case-insensitivity, we also store
+only the lowercase version of a word, for example, "I" is stored as "i".  Since
+the posts contains both English text and code, the words we extract belong to
+the union of English and the respective programming language of the post. 
 
 The table below shows how many unique words we found in each set of posts.  It
 also shows how many word-to-snippet edges we found, and to how many snippets each
@@ -91,32 +92,28 @@ word points to, on average.
 
 Tag | Words | Words/Post | Word-to-Snippet Edges | Mean Snippets/Word
 :------------- | -------------: | -------------: | -------------: | -------------:
-C | 954,873 | 0.00 | 34,735,409 | 42.79 
-C# | 3,441,419 | 0.00 | 153,264,533 | 52.27
-C++ | 1,807,594 | 0.00 | 77,956,382 | 51.25
-Java | 4,047,130 | 0.00 | 0  | 0
-Python | 2,289,742 | 0.00 | 107,438,703 | 54.61
+C | 850,704 | 636.05 | 31,593,286 | 153.45
+C# | 2,943,746 | 0.00 | 153,264,533 | 52.27
+C++ | 1,591,385 | 0.00 | 77,956,382 | 51.25
+Java | 4,047,130 | 0.00 | 213,809,262 | 61.45
+Python | 2,048,448 | 0.00 | 107,438,703 | 54.61
 
 For each word, we counted how many snippets it points to.  The following table
 lists the top-10 words for each tag.
 
-{% assign c = 284767 %}
-{% assign cp = (c * 1.0 / 34735409.0) * 100 %}
-{{ c }}
-{{ cp }}
 
 Word | C | % | Word | C# | % | Word | C++ | % | Word | Java | % | Word | Python | %
 :------------- | -------------: | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: 
-I | {{c}} | {{ cp | round: 4 }} | I | 1,218,920 | I  | 620,710 | x  | 0 | I | 904,851
-the | 282,278 | to | 1,202,769 | the  | 607,361 | x  | 0 | to | 878,562  
-to | 276,315 | the | 1,176,373 | to  | 605,672 | x  | 0 | the | 869,901 
-a | 257,874 | a | 1,066,947 | a  | 563,295 | x  | 0 | a | 800,764 
-is | 255,140 | is | 1,054,660 | is  | 549,704 | x  | 0 | in | 787,593 
-and | 232,321 | in | 1,009,249 | and  | 506,082 | x | 0 | is | 746,705 
-in | 226,092 | and | 964,759 | in | 494,377 | x  | 0 | and | 711,191 
-of | 217,928 | this | 957,859 | this | 481,016 | x | 0 | this | 651,727 
-int | 212,197 | of | 847,140 | of  | 478,500 | x  | 0 | of | 624,748 
-0 | 211,774 | it | 839,999 | it  | 452,990 | x  | 0 | for | 611,496 
+I | 284,767 | 0 | I | 1,218,920 | 0 | I  | 620,710 | 0 | I  | 0 | 0 | I | 904,851 | 0
+the | 282,278 | 0 | to | 1,202,769 | 0 | the  | 607,361 | 0 | to  | 0 | 0 | to | 878,562 | 0 
+to | 276,315 | 0 | the | 1,176,373 | 0 | to  | 605,672 | 0 | the  | 0 | 0 | the | 869,901 | 0 
+a | 257,874 | 0 | a | 1,066,947 | 0 | a  | 563,295 | 0 | is | 0 | 0 | a | 800,764 | 0
+is | 255,140 | 0 | is | 1,054,660 | 0 | is  | 549,704 | 0 | a  | 0 | 0 | in | 787,593 | 0
+and | 232,321 | 0 | in | 1,009,249 | 0 | and  | 506,082 | 0 | in | 0 | 0 | is | 746,705 | 0
+in | 226,092 | 0 | and | 964,759 | 0 | in | 494,377 | 0 | and | 0 | 0 | and | 711,191 | 0
+of | 217,928 | 0 | this | 957,859 | 0 | this | 481,016 | 0 | this | 0 | 0 | this | 651,727 | 0
+int | 212,197 | 0 | of | 847,140 | 0 | of  | 478,500 | 0 | it | 0 | 0 | of | 624,748 | 0
+0 | 211,774 | 0 | it | 839,999 | 0 | it  | 452,990 | 0 | of | 0 | 0 | for | 611,496 | 0
 
 
 ### Ranking Snippets
@@ -129,12 +126,6 @@ transitively, snippets of higher quality.
 
 For our initial ranking scheme, we will rank the query results by the sum of
 'score' and 'favorite_count' attributes.
-
-An alternative ranking scheme, i
-
-
-
-
 
 ## Evaluation
 
