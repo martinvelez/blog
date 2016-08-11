@@ -21,4 +21,4 @@ permalink: /:year/:month/:day/:title.html
 markdown: kramdown
 
 gems:
-  - jekyll-sitemap
+ - jekyll-sitemap
