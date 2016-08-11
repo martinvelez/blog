@@ -12,18 +12,45 @@ There is vast amount of code snippets online.
 Code snippets are short pieces of code.
 Programmers often search online for snippets that they can reuse or they can
 learn from.
+Different from searching actual projects.
 
-google or bing
-stackoverflow, tutorials point, or thousands of websites with code snippets
+We estimate that there are thousands of websitew with code snippets, like Stack
+Overflow and Tutorial Point.
+
+Currently, programmers use a general-purpose search engine, like Google or Bing,
+to find the snippet they are searching for.
+
+Example:
+* Open Google.
+* Type query.
+* Pick a URL.
+* Find snippet on page.
+
+Problem: 
+* There is a lot of information users have to sift through to get to the actual code snippet.
+* Not high quality snippets
+* keyword matching is over the code and not the context
+
+Can we fulfill this information need better?
 
 ## Related Work 
-Bing Developer Assistant
+Query: keyword
+Set: Open Source Projects
+* https://searchcode.com
+* https://www.openhub.net/
+* Google code search (defunct)
+* Huawei internal code search
 
-CSnippex
 
-## Methodology
+Query: natural language keyword query
+Set: Code Snippets
+* Bing Developer Assistant
 
-Given a keyword query, find a set of snippets. 
+Automatically fixing code snippets
+* CSnippex
+
+## Design and Implementation 
+Given a natural language keyword query, find a set of snippets. 
 
 0. Keyword queries
 1. Get an initial set of snippets.
@@ -62,45 +89,60 @@ will be restricted to a particular programming language.  We will focus on
 Python, C, C++, Java, the main programming languages taught at UC Davis, and C#,
 the programming language Bing Developer Assistant supports.  
 
-In Stack Overflow, most code snippets are found inside '\<pre\>' tags.  A posts
-can have more than one snippet of code.  For each post, we extracted the text
-inside '\<pre\>' tags.  Note that a posts can have more than one snippet of
-code.  A posts can have a snippet of code found in other posts.   We identified
-duplicates and removed all duplicate snippets.  The table below shows how many
-posts and snippets we found and extracted for each programming language tag.
+In Stack Overflow, users usually wrap code snippets inside '\<pre\>' tags.  A
+posts can have more than one snippet of code.  For each post, we extracted the
+text inside '\<pre\>' tags.  We call the t  Note that a posts can have more than
+one snippet of code.  A posts can have a snippet of code found in other posts.
+We identified duplicates and removed all duplicate snippets.  
 
-Tag | Posts | Snippets | Unique Snippets 
-:------------- | -------------: | -------------: | -------------: 
-C | 220,085 | 306,716 | 303,986
-C# | 962,755 | 1,291,526 | 1,281,136 
-C++ | 452,908 | 660,441 | 655,008
-Java | 1,086,506 | 1,539,388 | 1,522,709 
-Python | 587,679 | 947,241 | 932,529 
+The table below shows our results of processing the Posts.xml file to extract
+posts and snippets.
+
+Tag | All Posts | Posts with Snippets | Snippets | Snippets/Post
+:--- | ---: | ---: | ---: | ---:
+c | 220,085 | 165,935 | 303,986 | 1.85
+c# | 962,755 | 686,621 | 1,281,136 | 1.88
+c++ | 452,908 | 334,821 | 655,008 | 1.97
+java | 1,086,506 | 780,777 | 1,522,709 | 1.97
+python | 587,679 | 467,566 | 932,529 | 2.03
 
 
 ### Indexing Snippets
 
 We tokenized each post to extract its set of words using the tokenize function
-in the Appendix.  Since queries are usually case-insensitivity, we also store
-only the lowercase version of a word, for example, "I" is stored as "i".  Since
-the posts contains both English text and code, the words we extract belong to
-the union of English and the respective programming language of the post. 
+in the Appendix.  Since queries are usually case-insensitive, we also store only
+the lowercase version of words, for example, "I" is stored as "i".  Since the
+posts contains both English text and code, the words we extract belong to the
+union of English and the respective programming language of the post.  This
+should allow users to use programming language terms in their queries. 
 
 The table below shows how many unique words we found in each set of posts.  It
 also shows how many word-to-snippet edges we found, and to how many snippets each
 word points to, on average. 
 
+
 Tag | Words | Words/Post | Word-to-Snippet Edges | Mean Snippets/Word
 :------------- | -------------: | -------------: | -------------: | -------------:
-C | 850,704 | 636.05 | 31,593,286 | 153.45
-C# | 2,943,746 | 0.00 | 153,264,533 | 52.27
-C++ | 1,591,385 | 0.00 | 77,956,382 | 51.25
-Java | 4,047,130 | 0.00 | 213,809,262 | 61.45
-Python | 2,048,448 | 0.00 | 107,438,703 | 54.61
+c | 800,754 | 636.05 | 33,341,781 | 41.63 
+c# | 2,768,494 | 593.38 | 138,166,285 | 204.14
+c++ | 1,491,612 | 661.63 | 70,897,739 | 196.09
+java | 3,306,456 | 795.53 | 193,544,817 | 228.73
+python | 1,952,072 | 637.92 | 97,945,358 | 210.30
 
 For each word, we counted how many snippets it points to.  The following table
 lists the top-10 words for each tag.
 
+Word | C 
+:--- | ---:
+i|294016
+the|283017
+to|274416
+is|259572
+a|258010
+and|237314
+in|232866
+this|220304
+of|216761
 
 Word | C | % | Word | C# | % | Word | C++ | % | Word | Java | % | Word | Python | %
 :------------- | -------------: | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: 
