@@ -61,8 +61,8 @@ Given a natural language keyword query, find a set of snippets.
 
 ### Corpus of Snippets
 Stack Overflow ([http://stackoverflow.com/](http://stackoverflow.com)) is a
-website where users posts programming-related questions, and, usually, other
-users posts answers. The user who posted the question usually selects one of the
+website where users posts programming-related *questions*, and, usually, other
+users posts *answers*. The user who posted the question usually selects one of the
 answers.  This answer is called the *accepted answer*.  Users can vote posts up
 or down.
 
@@ -73,7 +73,7 @@ of all of their websites including Stack Overflow on the Internet Archive
 on June 13, 2016.  We downloaded it on August 3, 2016.
 
 We downloaded the stackoverflow.com-Posts.7z, a 8.8G file.  This compressed file
-contains a 44G file caled Posts.xml  There is no detailed description but it
+contains a 44G file caled Posts.xml.  There is no detailed description but it
 appears to contain all of the Stack Overflow posts, which consists of questions
 and answers.  For our purposes, this dataset appears to be large enough to build
 a seed database of snippets.
@@ -121,41 +121,32 @@ also shows how many word-to-snippet edges we found, and to how many snippets eac
 word points to, on average. 
 
 
-Tag | Words | Words/Post | Word-to-Snippet Edges | Mean Snippets/Word
-:------------- | -------------: | -------------: | -------------: | -------------:
-c | 800,754 | 636.05 | 33,341,781 | 41.63 
-c# | 2,768,494 | 593.38 | 138,166,285 | 204.14
-c++ | 1,491,612 | 661.63 | 70,897,739 | 196.09
-java | 3,306,456 | 795.53 | 193,544,817 | 228.73
-python | 1,952,072 | 637.92 | 97,945,358 | 210.30
+Symbol | Statistic | c | c# | c++ | java | python
+:--- | :--- | ---: | ---: | ---: | ---: | ---:
+P | posts (with snippets) | 165,935 | 686,621 | 334,821 | 780,777 | 467,566
+- | all posts | 220,085 | 962,755 | 452,908 | 1,086,506 | 587,679
+N | documents (snippets) | 303,986 | 1,281,136 | 655,008 | 1,522,709 | 932,529
+- | avg. # of snippets per post | 1.85 | 1.88 | 1.97 | 1.97 | 2.03
+- | avg. # of snippets per term | 41.64 | 52.19 | 50.09 | 61.05 | 52.64
+M | terms (unique, case folding) | 800,754 | 2,768,494 | 1,491,612 | 3,306,456 | 1,952,072
+- | avg. # of tokens (words) per post | 636.05 | 593.38 | 661.63 | 795.53 | 637.92
 
 For each word, we counted how many snippets it points to.  The following table
 lists the top-10 words for each tag.
 
-Word | C 
-:--- | ---:
-i|294016
-the|283017
-to|274416
-is|259572
-a|258010
-and|237314
-in|232866
-this|220304
-of|216761
 
-Word | C | % | Word | C# | % | Word | C++ | % | Word | Java | % | Word | Python | %
-:------------- | -------------: | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: | :------------- | -------------: 
-I | 284,767 | 0 | I | 1,218,920 | 0 | I  | 620,710 | 0 | I  | 0 | 0 | I | 904,851 | 0
-the | 282,278 | 0 | to | 1,202,769 | 0 | the  | 607,361 | 0 | to  | 0 | 0 | to | 878,562 | 0 
-to | 276,315 | 0 | the | 1,176,373 | 0 | to  | 605,672 | 0 | the  | 0 | 0 | the | 869,901 | 0 
-a | 257,874 | 0 | a | 1,066,947 | 0 | a  | 563,295 | 0 | is | 0 | 0 | a | 800,764 | 0
-is | 255,140 | 0 | is | 1,054,660 | 0 | is  | 549,704 | 0 | a  | 0 | 0 | in | 787,593 | 0
-and | 232,321 | 0 | in | 1,009,249 | 0 | and  | 506,082 | 0 | in | 0 | 0 | is | 746,705 | 0
-in | 226,092 | 0 | and | 964,759 | 0 | in | 494,377 | 0 | and | 0 | 0 | and | 711,191 | 0
-of | 217,928 | 0 | this | 957,859 | 0 | this | 481,016 | 0 | this | 0 | 0 | this | 651,727 | 0
-int | 212,197 | 0 | of | 847,140 | 0 | of  | 478,500 | 0 | it | 0 | 0 | of | 624,748 | 0
-0 | 211,774 | 0 | it | 839,999 | 0 | it  | 452,990 | 0 | of | 0 | 0 | for | 611,496 | 0
+Word (c) | Snippets | % |Word (c#) | Snippets | % |Word (c++) | Snippets | % |Word (java) | Snippets | % |Word (python) | Snippets | % 
+:--- | ---: | ---: |:--- | ---: | ---: |:--- | ---: | ---: |:--- | ---: | ---: |:--- | ---: | ---: 
+i | 294016 | 0.88 |i | 1252663 | 0.87 |i | 634703 | 0.85 |i | 1484667 | 0.74 |i | 912531 | 0.89 
+the | 283017 | 0.85 |to | 1195481 | 0.83 |the | 609632 | 0.82 |to | 1405202 | 0.70 |to | 866589 | 0.84 
+to | 274416 | 0.82 |the | 1180694 | 0.82 |to | 601768 | 0.81 |the | 1399591 | 0.69 |the | 866318 | 0.84 
+is | 259572 | 0.78 |is | 1081368 | 0.75 |a | 565735 | 0.76 |is | 1295443 | 0.64 |a | 797027 | 0.78 
+a | 258010 | 0.77 |a | 1068197 | 0.74 |is | 563222 | 0.75 |a | 1228642 | 0.61 |in | 791091 | 0.77 
+and | 237314 | 0.71 |in | 1028865 | 0.71 |and | 518141 | 0.69 |and | 1191358 | 0.59 |is | 764424 | 0.74 
+in | 232866 | 0.70 |this | 1006546 | 0.70 |in | 512532 | 0.69 |in | 1191134 | 0.59 |and | 721980 | 0.70 
+this | 220304 | 0.66 |and | 995178 | 0.69 |this | 506810 | 0.68 |this | 1188850 | 0.59 |this | 691557 | 0.67 
+of | 216761 | 0.65 |it | 871196 | 0.60 |of | 476137 | 0.64 |it | 1028621 | 0.51 |for | 629272 | 0.61 
+it | 212731 | 0.64 |of | 844138 | 0.58 |it | 469052 | 0.63 |of | 972197 | 0.48 |of | 618666 | 0.60
 
 
 ### Ranking Snippets
@@ -168,6 +159,23 @@ transitively, snippets of higher quality.
 
 For our initial ranking scheme, we will rank the query results by the sum of
 'score' and 'favorite_count' attributes.
+
+* score(q,d) = score(d) = score + favorite_count
+
+Alternative ranking schemes:
+* score(q,d) = for all t in q, sum of tf-id(t,d) 
+* score(q,d) = cosine_sim(q,d)
+* lnc.ltc (pg.118 of IR by Manning)
+
+
+### Related Snippets
+
+Find similar documents: 
+* Calculate term frequencies for posts.
+* Calculate euclidean normalized tf values. 
+* Precomute document -> ranked list of similar documents
+
+
 
 ## Evaluation
 
