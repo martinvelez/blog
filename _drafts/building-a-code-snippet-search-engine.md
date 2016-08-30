@@ -190,6 +190,13 @@ Track how often users click.
 
 ## Discussion
 
+### User Interface
+
+1. Look at krugle
+2. Add filter by token
+3. Add upvote counts.
+4. Add compilation result info.
+5. Allow search over multiple languages.
 
 ## Conclusion
 
