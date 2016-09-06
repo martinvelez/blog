@@ -21,12 +21,14 @@ Currently, programmers use a general-purpose search engine, like Google or Bing,
 to find the snippet they are searching for.
 
 Example:
+
 * Open Google.
-* Type query.
-* Pick a URL.
-* Find snippet on page.
+* Type query.  'open a file in python'.
+* Pick a URL. 'pick first'.
+* Find snippet on page. '11th snippet on 1st page'.
 
 Problem: 
+
 * There is a lot of information users have to sift through to get to the actual code snippet.
 * Not high quality snippets
 * keyword matching is over the code and not the context
@@ -34,19 +36,22 @@ Problem:
 Can we fulfill this information need better?
 
 ## Related Work 
+Vocabulary: code
 Query: keyword
 Set: Open Source Projects
+
 * https://searchcode.com
 * https://www.openhub.net/
 * Google code search (defunct)
-* Huawei internal code search
 
-
-Query: natural language keyword query
+Vocabulary: code and natural language
+Query: keyword
 Set: Code Snippets
+
 * Bing Developer Assistant
 
 Automatically fixing code snippets
+
 * CSnippex
 
 ## Design and Implementation 
@@ -120,15 +125,14 @@ The table below shows how many unique words we found in each set of posts.  It
 also shows how many word-to-snippet edges we found, and to how many snippets each
 word points to, on average. 
 
-
-Symbol | Statistic | c | c# | c++ | java | python
+Symbol | Statistic | C | C# | C++ | Java | Python
 :--- | :--- | ---: | ---: | ---: | ---: | ---:
-P | posts (with snippets) | 165,935 | 686,621 | 334,821 | 780,777 | 467,566
+- | Posts with Snippets | 165,935 | 686,621 | 334,821 | 780,777 | 467,566
 - | all posts | 220,085 | 962,755 | 452,908 | 1,086,506 | 587,679
-N | documents (snippets) | 303,986 | 1,281,136 | 655,008 | 1,522,709 | 932,529
+N | Code Snippets (documents) | 303,986 | 1,281,136 | 655,008 | 1,522,709 | 932,529
 - | avg. # of snippets per post | 1.85 | 1.88 | 1.97 | 1.97 | 2.03
 - | avg. # of snippets per term | 41.64 | 52.19 | 50.09 | 61.05 | 52.64
-M | terms (unique, case folding) | 800,754 | 2,768,494 | 1,491,612 | 3,306,456 | 1,952,072
+M | Terms (unique, case folding) | 800,754 | 2,768,494 | 1,491,612 | 3,306,456 | 1,952,072
 - | avg. # of tokens (words) per post | 636.05 | 593.38 | 661.63 | 795.53 | 637.92
 
 For each word, we counted how many snippets it points to.  The following table
@@ -151,18 +155,24 @@ it | 212731 | 0.64 |of | 844138 | 0.58 |it | 469052 | 0.63 |of | 972197 | 0.48 |
 
 ### Ranking Snippets
 
-Each post has a 'score' attribute, which is the sum of upvotes and downvotes
-and can be negative, and a 'favorite_count' attribute, which is the number of
-users who have marked the post as a favorite and is greater than or equal to
-zero.  We assume that higher scores indicate posts of higher quality and,
-transitively, snippets of higher quality.
+We define a static quality score for documents.  Each post has a 'score'
+attribute, which is the sum of upvotes and downvotes and can be negative, and a
+'favorite_count' attribute, which is the number of users who have marked the
+post as a favorite and is greater than or equal to zero.  We assume that higher
+scores indicate posts of higher quality and, transitively, snippets of higher
+quality. Let d be a document, then 
 
-For our initial ranking scheme, we will rank the query results by the sum of
-'score' and 'favorite_count' attributes.
+* score(d) = score + favorite_count
+
+We define a scoring function for retrieved documents given a query.
+Let *q* be a query and *d* be a document, then
 
 * score(q,d) = score(d) = score + favorite_count
 
-Alternative ranking schemes:
+**We rank documents, in decreasing order, by their *score(q,d)*.**
+We will use this as our initial ranking scheme and later evaulate alternative
+scoring functions.
+
 * score(q,d) = for all t in q, sum of tf-id(t,d) 
 * score(q,d) = cosine_sim(q,d)
 * lnc.ltc (pg.118 of IR by Manning)
@@ -171,6 +181,7 @@ Alternative ranking schemes:
 ### Related Snippets
 
 Find similar documents: 
+
 * Calculate term frequencies for posts.
 * Calculate euclidean normalized tf values. 
 * Precomute document -> ranked list of similar documents
